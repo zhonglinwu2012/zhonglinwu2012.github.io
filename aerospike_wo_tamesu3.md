@@ -1,22 +1,25 @@
 ### fluentdとaerospikeを組みあわせる
-*fluentd*のログデータをaerospikeに投入する場合を考える。
+
+*fluentd* のログデータをaerospikeに投入する場合を考える。
 
 #### fluentdのinstallと設定
 以下のリンクを参照
 http://docs.fluentd.org/articles/install-by-rpm#step-1-install-from-rpm-repository
 
-```
+```bash
 curl -L https://toolbelt.treasuredata.com/sh/install-redhat-td-agent2.sh | sh
 ```
 
 #### fluent-plugin-aerospikeのinstall
+
 ```
 sudo /usr/lib64/fluent/ruby/bin/gem install fluent-plugin-aerospike
 ```
 
 #### 設定ファイルを編集
 設定ファイルはdefaultは/etc/td-agent以下にある。
-```
+
+```bash
 [root@localhost td-agent]# pwd
 /etc/td-agent
 [root@localhost td-agent]# ls -1
@@ -26,7 +29,9 @@ td-agent-activities.conf
 td-agent.conf
 td-agent.conf.tmpl
 ```
+
 以下は設定の一例
+
 ```
 [root@localhost td-agent]# cat td-agent.conf
 
@@ -59,7 +64,9 @@ td-agent.conf.tmpl
   set acti
 </match>
 ```
+
 /var/www/app/shared/log/act.logは以下のようなログ形式とする
+
 ```
 {"ts":1435025600603,"account":"ac_123_55","vt":"2e7RHi.kSTLPuk","cid":"12345678","ctype":"1","act_type":"detail","act_params":[{"commodityCode":"CC55463"}]}
 {"ts":1435025679302,"account":"ac_123_55","vt":"2e7RHi.kSTLPuk","cid":"12345678","ctype":"1","act_type":"detail","act_params":[{"commodityCode":"CC55463"}]}
@@ -84,14 +91,18 @@ td-agent.conf.tmpl
 
 #### fluentdの動作確認
 fluentdの起動と終了はそれぞれ以下のコマンドで実現する
+
 ```
 /etc/init.d/td-agent start
 ```
+
 ```
 /etc/init.d/td-agent stop
 ```
+
 fluentdを起動するしてから、ログが変更になると、aerospikeにレコードが書き込まれる
-```
+
+```sql
 aql> select * from bar.acti
 +---------------------------------------------------+---------------+-------------+------------------+------------+-------+------------+-------------------------------+
 | key                                               | ts            | account     | vt               | cid        | ctype | act_type   | act_params                    |
@@ -107,10 +118,13 @@ aql> select * from bar.acti
 
 #### ついでにfluentdから別のhttp serverにpostし直すことも試した。
 gemのinstall
+
 ```
 /usr/lib64/fluent/ruby/bin/gem install fluent-plugin-out-http
 ```
+
 設定ファイル td-agent-activities.conf:
+
 ```
 <source>
   type tail
@@ -126,7 +140,9 @@ gemのinstall
   raise_on_error false
 </match>
 ```
+
 受け取るhttp serverの実装はとにかく手間を省くため、sinatraで実装
+
 ```
 require 'sinatra'
 
@@ -144,7 +160,9 @@ post "/" do
   params.to_s
 end
 ```
+
 http serverを起動
+
 ```
 [vagrant@localhost aerospike]$ ruby myapp.rb
 [2016-01-25 06:06:29] INFO  WEBrick 1.3.1
@@ -152,8 +170,10 @@ http serverを起動
 == Sinatra (v1.4.6) has taken the stage on 4567 for development with backup from WEBrick
 [2016-01-25 06:06:29] INFO  WEBrick::HTTPServer#start: pid=8359 port=4567
 ```
+
 前記のact.logを変更すると、logファイルが出力される。
 結果のlogの中身の例
+
 ```
 {"ts"=>"1435025600603", "account"=>"ac_123_55", "vt"=>"2e7RHi.kSTLPuk", "cid"=>"12345678", "ctype"=>"1", "act_type"=>"detail", "act_params"=>"{\"commodityCode\"=>\"CC55463\"}"}
 {"ts"=>"1435025679302", "account"=>"ac_123_55", "vt"=>"2e7RHi.kSTLPuk", "cid"=>"12345678", "ctype"=>"1", "act_type"=>"detail", "act_params"=>"{\"commodityCode\"=>\"CC55464\"}"}
