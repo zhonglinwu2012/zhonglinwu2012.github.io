@@ -2,4 +2,4 @@ theme: jekyll-theme-tactile
 gems:
   - jekyll-sitemap
   - jekyll-feed
-site.title: 呉さんの倉庫
+title: 呉さんの倉庫
