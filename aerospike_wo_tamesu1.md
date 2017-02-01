@@ -48,12 +48,11 @@ mysqlのDBからデータをaerospikeにロードしてみる。
 
 DBの内容：
 
-<table>
-<tr><th>user_id</th><th>user_no</th><th>customer_status</th></tr>
-<tr><td>0000000000609692</td><td>1</td><td>ng</td>
-<tr><td>0000000000609777</td><td>2</td><td>ng</td>
-<tr><td>0000000000609787</td><td>3</td><td>ok</td>
-</table>
+|user_id|user_no|customer_status|
+|---|---|---|
+|0000000000609692|1|ng|
+|0000000000609777|2|ng|
+|0000000000609787|3|ok|
 
 config.yml:
 
@@ -89,12 +88,11 @@ embulk run config.yml
 
 aqlで結果を確認すると
 
-<table>
-<tr><th>user_id</th><th>user_no</th><th>customer_status</th></tr>
-<tr><td>0000000000609692</td><td>3</td><td>ok</td>
-<tr><td>0000000000609777</td><td>3</td><td>ok</td>
-<tr><td>0000000000609787</td><td>3</td><td>ok</td>
-</table>
+|user_id|user_no|customer_status|
+|---|---|---|
+|0000000000609692|3|ok|
+|0000000000609777|3|ok|
+|0000000000609787|3|ok|
 
 
 次回 rubyとaerospikeで試す
