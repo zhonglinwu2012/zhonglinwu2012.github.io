@@ -1,3 +1,7 @@
+---
+# LOGとaerospikeのテスト
+---
+
 ### fluentdとaerospikeを組みあわせる
 
 *fluentd* のログデータをaerospikeに投入する場合を考える。
