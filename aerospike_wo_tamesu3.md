@@ -174,7 +174,7 @@ http serverを起動
 前記のact.logを変更すると、logファイルが出力される。
 結果のlogの中身の例
 
-```
+```javascript
 {"ts"=>"1435025600603", "account"=>"ac_123_55", "vt"=>"2e7RHi.kSTLPuk", "cid"=>"12345678", "ctype"=>"1", "act_type"=>"detail", "act_params"=>"{\"commodityCode\"=>\"CC55463\"}"}
 {"ts"=>"1435025679302", "account"=>"ac_123_55", "vt"=>"2e7RHi.kSTLPuk", "cid"=>"12345678", "ctype"=>"1", "act_type"=>"detail", "act_params"=>"{\"commodityCode\"=>\"CC55464\"}"}
 {"ts"=>"1435025679412", "account"=>"ac_123_55", "vt"=>"2e7RHi.kSTLPuk", "cid"=>"12345678", "ctype"=>"1", "act_type"=>"detail", "act_params"=>"{\"commodityCode\"=>\"NE663BU102XX\"}"}
