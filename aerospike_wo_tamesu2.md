@@ -55,7 +55,7 @@ client.close
 
 実行結果
 
-```json
+```javascript
 {"customer_code"=>"0000000000609787", "user_no"=>1, "status"=>"ok"}
 true
 ```
@@ -80,7 +80,7 @@ client.close
 
 実行結果
 
-```json
+```javascript
 {"customer_code"=>"0000000000609787", "user_no"=>1, "status"=>"ok"}
 false
 ```
