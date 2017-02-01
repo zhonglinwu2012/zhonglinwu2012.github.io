@@ -1,20 +1,31 @@
 ## install
+
 http://www.aerospike.com/ を開く
+
 Try Communication Edition をクリック
+
 Set up an Aerospike Serverをクリック
+
 Linuxを選択してクリック
+
 Continueをクリック
+
 Choose Your Linuxをクリック
+
 Install On Redhatを選択
+
 画面の指示通りを実行する
 
 注意：aerospikeは3000と3001を使うが、開発環境ではport衝突する場合、それを修正
+
 ```
 sudo vi /etc/aerospike/aerospike.conf
 ```
+
 その中のport 3000とport 3001を別の番号に書き換える、例えば5000,5001
 
 ## 開発ツール関係
+
 コマンドラインではaqlとascliがあります、
 それぞれsqlライクとcliのコマンドです
 
@@ -23,15 +34,20 @@ https://github.com/aerospike/aerospike-client-ruby
 ↑のexamples以下に例があります
 
 embulk のinstallについては https://github.com/embulk/embulk#linux--mac--bsd を参照
+
 aerospikeのpluginは embulk gem install embulk-output-aerospike でinstall
+
 https://github.com/tkrs/embulk-output-aerospike
+
 パラメータなどは↑を参照
 
 ## embulkでデータロード
+
 mysqlのDBからデータをaerospikeにロードしてみる。
 一応成功しているように見えるが、結果がおかしい、全部最後のデータになってしまいます。
 
 DBの内容：
+
 <table>
 <tr><th>user_id</th><th>user_no</th><th>customer_status</th></tr>
 <tr><td>0000000000609692</td><td>1</td><td>ng</td>
@@ -40,6 +56,7 @@ DBの内容：
 </table>
 
 config.yml:
+
 ```yaml
 in:
   type: mysql
@@ -65,11 +82,13 @@ out:
 ```
 
 embulkを実行する
+
 ```
 embulk run config.yml
 ```
 
 aqlで結果を確認すると
+
 <table>
 <tr><th>user_id</th><th>user_no</th><th>customer_status</th></tr>
 <tr><td>0000000000609692</td><td>3</td><td>ok</td>
