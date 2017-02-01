@@ -1,4 +1,7 @@
-## rubyによるアクセス
+---
+# rubyによるアクセス
+---
+
 rubyでaerospikeにアクセスしてみる。
 
 #### install
