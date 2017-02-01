@@ -1,4 +1,4 @@
-# zhonglinwu2012.github.io
+# 備忘録
 
 * [aerospikeを試すその１](/aerospike_wo_tamesu1)
 * [aerospikeを試すその２](/aerospike_wo_tamesu2)
