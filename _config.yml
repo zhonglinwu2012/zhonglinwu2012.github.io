@@ -2,4 +2,8 @@ theme: jekyll-theme-tactile
 gems:
   - jekyll-sitemap
   - jekyll-feed
-title: 呉さんの倉庫
+  - jekyll-titles-from-headings
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-default-layout
+
