@@ -1,3 +1,8 @@
+---
+layout: post
+title:  aerospikeのinstall
+---
+
 ## install
 
 http://www.aerospike.com/ を開く
